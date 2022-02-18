@@ -5,4 +5,4 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update && apt-get upgrade -y && apt install nginx -y
 COPY ./sours_code /usr/share/nginx/html/
 CMD nginx /bin/bash
-EXPOSE 8080
+EXPOSE 8081
