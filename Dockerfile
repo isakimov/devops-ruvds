@@ -4,6 +4,5 @@ ENV TZ=Europe/Moscow
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update && apt-get upgrade -y && apt install nginx -y
 COPY ./sours_code /usr/share/nginx/html/
-CMD service nginx start
-ENTRYPOINT ["-g", "daemon off;"] 
+CMD ["service nginx start", "-g", "daemon off;"]
 EXPOSE 80
