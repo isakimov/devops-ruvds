@@ -25,3 +25,4 @@ spec:
         image: kykaryak/devops-info:1.0
         ports:
         - containerPort: 80
+      serviceAccountName: admin-user
