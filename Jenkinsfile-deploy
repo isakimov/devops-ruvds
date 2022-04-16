@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('docker version') {
+            steps {
+                sh "echo $USER"
+                sh 'docker version'
+            }
+        }
+        stage('Delete before build start') {
+            steps {
+                deleteDir()
+            }
+        }
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/Kykaryak/devops-info.git'
+            }
+            }
+        stage('Test') {
+            steps {
+                sh 'pwd'
+                sh 'ls -la'
+            }
+        }
+        stage('deploy app in kubernetes') {
+            steps {
+            sh 'kubectl apply -f devops-info-deployment.yaml'
+            }
+        }
+        stage('deploy service in kubernetes') {
+            steps {
+            sh 'kubectl apply -f devops-info-sevice.yaml'
+            }
+        }
+    }
+}
