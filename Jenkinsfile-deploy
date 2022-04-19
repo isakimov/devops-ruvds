@@ -1,33 +1,30 @@
-pipeline {
-    agent any
+@Library("JenkinsPipeline@v1.3") _
 
+JenkinsPipeline {
+    config {
+        kubeconfig("my-kubeconfig")
     stages {
         stage('docker version') {
             steps {
                 sh "echo $USER"
                 sh 'docker version'
-            }
-        }
-        stage('Delete before build start') {
-            steps {
-                deleteDir()
-            }
+           }
         }
         stage('Checkout') {
             steps {
                 git branch: 'main',
                     url: 'https://github.com/Kykaryak/devops-info.git'
-            }
-            }
+           }
+        }
         stage('Check kubectl version') {
             steps {
                  sh 'kubectl version'
-          }
-      }
+           }
+        }
         stage('deploy app in kubernetes') {
             steps {
             sh "kubectl --namespace='default' apply -f devops-info-deployment.yaml"
-            }
+           }
         }
         stage('deploy service in kubernetes') {
             steps {
