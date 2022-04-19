@@ -1,8 +1,6 @@
-@Library("JenkinsPipeline@v1.3") _
-
-JenkinsPipeline {
-    config {
-        kubeconfig("c17ac992-45c8-45c5-96ca-dccb54f07eee")
+pipeline {
+    agent any
+    
     stages {
         stage('docker version') {
             steps {
