@@ -19,20 +19,19 @@ pipeline {
                     url: 'https://github.com/Kykaryak/devops-info.git'
             }
             }
-        stage('Test') {
+        stage('Check kubectl version') {
             steps {
-                sh 'pwd'
-                sh 'ls -la'
-            }
-        }
+                 sh 'kubectl version'
+          }
+      }
         stage('deploy app in kubernetes') {
             steps {
-            sh "kubectl --namespace='default' apply -f k8s/devops-info-deployment.yaml"
+            sh "kubectl --namespace='default' apply -f devops-info-deployment.yaml"
             }
         }
         stage('deploy service in kubernetes') {
             steps {
-            sh "kubectl --namespace='default' apply -f k8s/devops-info-service.yaml"
+            sh "kubectl --namespace='default' apply -f devops-info-service.yaml"
             }
         }
     }
