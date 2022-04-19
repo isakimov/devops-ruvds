@@ -2,7 +2,7 @@
 
 JenkinsPipeline {
     config {
-        kubeconfig("my-kubeconfig")
+        kubeconfig("c17ac992-45c8-45c5-96ca-dccb54f07eee")
     stages {
         stage('docker version') {
             steps {
