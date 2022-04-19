@@ -14,11 +14,6 @@ pipeline {
                     url: 'https://github.com/Kykaryak/devops-info.git'
            }
         }
-        stage('Check kubectl version') {
-            steps {
-                 sh 'kubectl version'
-           }
-        }
         stage('Deploy App on k8s') {
              steps {
                  sshagent(['k8s-deploy']) {
