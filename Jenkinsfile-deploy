@@ -19,15 +19,19 @@ pipeline {
                  sh 'kubectl version'
            }
         }
-        stage('deploy app in kubernetes') {
-            steps {
-            sh "kubectl --namespace='default' apply -f devops-info-deployment.yaml"
-           }
-        }
-        stage('deploy service in kubernetes') {
-            steps {
-            sh "kubectl --namespace='default' apply -f devops-info-service.yaml"
-            }
-        }
+        stage('Deploy App on k8s') {
+             steps {
+                 sshagent(['k8s-deploy']) {
+                 sh "scp -o StrictHostKeyChecking=no devops-info-deployment.yaml ivan@192.168.54.10:/home/ivan"
+                 script {
+                    try{
+                      sh "ssh ivan@192.168.54.10 kubectl create -f ."
+                  }catch(error){
+                      sh "ssh ivan@192.168.54.10 kubectl create -f ."
+                                   }
+                                   }
+                        }
+                       }
+                               }
     }
 }
