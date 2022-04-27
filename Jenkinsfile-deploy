@@ -1,5 +1,5 @@
 pipeline {
-    agent RuVDS
+    agent { label 'RuVDS' }
     
     stages {
         stage('docker version') {
