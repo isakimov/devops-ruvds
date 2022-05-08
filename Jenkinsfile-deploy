@@ -17,7 +17,7 @@ pipeline {
         stage('Deploy App') {
             steps {
                 script {
-                    kubernetesDeploy(configs: "devops-info-deployment.yaml", kubeconfigId: "mykubeconfig")
+                    kubernetesDeploy(configs: "devops-info-deployment.yaml", kubeconfigId: "RuVDS_config")
              }      
           }
        }
