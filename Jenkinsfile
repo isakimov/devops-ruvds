@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'RuVDS' }
 
     stages {
         stage('docker version') {
@@ -16,7 +16,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/Kykaryak/devops-info.git'
+                    url: 'https://github.com/isakimov/devops-ruvds.git'
             }
             }
         stage('Test') {
@@ -27,14 +27,14 @@ pipeline {
         }
         stage('Build docker image') {
             steps {
-            sh 'docker build -t kykaryak/devops-info:1.0 .'
+            sh 'docker build -t isakimov/devops-info:1.0 .'
             }
         }
         stage('Push docker images to DockerHub') {
             steps {
                 withDockerRegistry(credentialsId: 'docker-hub-cred-kykaryak', url: 'https://index.docker.io/v1/') {
                     sh '''
-                        docker push kykaryak/devops-info:1.0
+                        docker push isakimov/devops-info:1.0
                     '''
                 }
             }   
@@ -42,7 +42,13 @@ pipeline {
         }
         stage('Delete docker image locally') {
             steps {
-            sh 'docker rmi kykaryak/devops-info:1.0'
+            sh 'docker rmi isakimov/devops-info:1.0'
+            }        
+        }
+        stage('Deploy App') {
+            steps {
+                script {
+                    kubernetesDeploy(configs: "devops-info-deployment.yaml", kubeconfigId: "RuVDS_config")
             }
         }
     }
