@@ -49,6 +49,7 @@ pipeline {
             steps {
                 script {
                     kubernetesDeploy(configs: "devops-info-deployment.yaml", kubeconfigId: "RuVDS_config")
+                }
             }
         }
     }
