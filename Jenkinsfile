@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Push docker images to DockerHub') {
             steps {
-                withDockerRegistry(credentialsId: 'docker-hub-cred-prod', url: 'https://index.docker.io/v1/') {
+                withDockerRegistry(credentialsId: 'dockerhub-cred-prod', url: 'https://index.docker.io/v1/') {
                     sh '''
                         docker push isakimov/devops-info:1.0
                     '''
