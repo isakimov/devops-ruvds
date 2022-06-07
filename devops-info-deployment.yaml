@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: devops-app
-        image: kykaryak/devops-info:1.0
+        image: isakimov/devops-info:1.0
         ports:
         - containerPort: 80
       serviceAccountName: default
